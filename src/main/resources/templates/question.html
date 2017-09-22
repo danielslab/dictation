@@ -30,51 +30,65 @@
 	function playAudio() {
 		$('#audio1').get(0).play();
 	}
+	function focusTextArea() {
+		$('#textarea1').focus();
+	}
+	function answer() {
+		$('#buttonAnswer').prop('disabled', true);
+		$('#compare').mergely({
+			cmsettings: { readOnly: true, lineNumbers: true, editor_height: '100px' },
+			lhs: function(setValue) {
+				setValue($('#textarea1').val());
+			},
+			rhs: function(setValue) {
+				setValue(/*[[ ${question.answerText} ]]*/);
+			}
+		});
+		$('#compareResult').show();
+	}
+	function next() {
+		location.reload();
+	}
 
 	$(document).ready(function () {
 		$('#compareResult').hide();
 	
+		// Event handlers.
 		$('#buttonRewind5sec').click(function() {
 			rewindAudio(5);
 		});
-
 		$('#buttonPause').click(function() {
 			pauseAudio();
 		});
-
 		$('#buttonPlay').click(function() {
 			playAudio();
 		});
-
 		$('#buttonAnswer').click(function() {
-			$('#buttonAnswer').prop('disabled', true);
-			$('#compare').mergely({
-				cmsettings: { readOnly: true, lineNumbers: true, editor_height: '100px' },
-				lhs: function(setValue) {
-					setValue($('#textarea1').val());
-				},
-				rhs: function(setValue) {
-					setValue(/*[[ ${question.answerText} ]]*/);
-				}
-			});
-			$('#compareResult').show();
+			answer();
 		});
-	
 		$('#buttonNext').click(function() {
-			location.reload();
+			next();
 		});
 
 		// Setup shortcuts.
-		shortcut.add("Alt+Z",function() {
+		shortcut.add("Alt+F5",function() {
 			rewindAudio(5);
 		});
-		shortcut.add("Alt+X",function() {
+		shortcut.add("Alt+F6",function() {
 			pauseAudio();
 		});
-		shortcut.add("Alt+C",function() {
+		shortcut.add("Alt+F7",function() {
 			playAudio();
 		});
-
+		shortcut.add("Alt+F8",function() {
+			focusTextArea();
+		});
+		shortcut.add("Alt+F9",function() {
+			answer();
+		});
+		shortcut.add("Alt+F10",function() {
+			next();
+		});
 	});
 	</script>
 
@@ -92,15 +106,16 @@
 		</div>
 		
 		<div class="container-fluid">
-		<textarea class="form-control input-lg" id="textarea1" rows="5"></textarea>
+			<h4>Please enter the sentences you heard.(Focus with Alt + F8.)</h4>
+			<textarea class="form-control input-lg" id="textarea1" rows="5"></textarea>
 		</div>
 		
 		<div class="container-fluid" style="margin-top:10px">
-			<button class="btn btn-danger" id="buttonRewind5sec" name="rewind5sec">Rewind5sec(Alt+Z)</button>
-			<button class="btn btn-danger" id="buttonPause" name="pause">Pause(Alt+X)</button>
-			<button class="btn btn-success" id="buttonPlay" name="play">Play(Alt+C)</button>
-			<button class="btn btn-primary" id="buttonAnswer" name="answer">Answer</button>
-			<button class="btn btn-light" id="buttonNext" name="clear">Next</button>
+			<button class="btn btn-danger" id="buttonRewind5sec" name="rewind5sec">Rewind5sec(Alt+F5)</button>
+			<button class="btn btn-danger" id="buttonPause" name="pause">Pause(Alt+F6)</button>
+			<button class="btn btn-success" id="buttonPlay" name="play">Play(Alt+F7)</button>
+			<button class="btn btn-primary" id="buttonAnswer" name="answer">Answer(Alt+F9)</button>
+			<button class="btn btn-light" id="buttonNext" name="clear">Next(Alt+F10)</button>
 		</div>
 		
 		<div id="compareResult" class="container-fluid">
