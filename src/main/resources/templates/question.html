@@ -22,7 +22,11 @@
 
 	<script type="text/javascript" th:inline="javascript">
 	function rewindAudio(sec) {
-		$('#audio1').get(0).currentTime -= sec;
+		if(sec == -1) {
+			$('#audio1').get(0).currentTime = 0;
+		} else {
+			$('#audio1').get(0).currentTime -= sec;
+		}
 	}
 	function pauseAudio() {
 		$('#audio1').get(0).pause();
@@ -55,6 +59,9 @@
 		$('#compareResult').hide();
 	
 		// Event handlers.
+		$('#buttonRewind').click(function() {
+			rewindAudio(-1);
+		});
 		$('#buttonRewind5sec').click(function() {
 			rewindAudio(5);
 		});
@@ -72,6 +79,9 @@
 		});
 
 		// Setup shortcuts.
+		shortcut.add("Alt+F1",function() {
+			rewindAudio(-1);
+		});
 		shortcut.add("Alt+F5",function() {
 			rewindAudio(5);
 		});
@@ -112,6 +122,7 @@
 		</div>
 		
 		<div class="container-fluid" style="margin-top:10px">
+			<button class="btn btn-danger" id="buttonRewind" name="rewind">Rewind(Alt+F1)</button>
 			<button class="btn btn-danger" id="buttonRewind5sec" name="rewind5sec">Rewind5sec(Alt+F5)</button>
 			<button class="btn btn-danger" id="buttonPause" name="pause">Pause(Alt+F6)</button>
 			<button class="btn btn-success" id="buttonPlay" name="play">Play(Alt+F7)</button>
