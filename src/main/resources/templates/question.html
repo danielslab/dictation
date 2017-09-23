@@ -47,7 +47,8 @@
 		$('#compareResult').show();
 	}
 	function next() {
-		location.reload();
+		var id = parseInt(/*[[ ${id} ]]*/);
+		location.href = "/questions/" + (id+1);
 	}
 
 	$(document).ready(function () {
@@ -119,7 +120,7 @@
 		</div>
 		
 		<div id="compareResult" class="container-fluid">
-			<h3>比較結果</h3>
+			<h3>Compare Result</h3>
 			<div id="compare"></div>
 		</div>
 	</div>

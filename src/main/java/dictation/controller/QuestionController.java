@@ -20,12 +20,18 @@ public class QuestionController {
     @GetMapping("/questions")
     public String questions(Model model) throws IOException {
     	// TODO
-        return "redirect:/questions/1";
+        return "redirect:/questions/0";
     }
 
     @GetMapping("/questions/{id}")
     public String index(Model model, @PathVariable String id) throws IOException {
-    	QuestionModel question = questionService.getQuestion(Integer.parseInt(id));
+    	int intId = Integer.parseInt(id);
+
+    	if(intId >= questionService.getQuestionCount()) {
+    		// idが問題数を超えている場合は、0番目の問題にリダイレクトする
+    		return "redirect:/questions/0";
+    	}
+    	QuestionModel question = questionService.getQuestion(intId);
         model.addAttribute("question", question);
 
         return "question";
