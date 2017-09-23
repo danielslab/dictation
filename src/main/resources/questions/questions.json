@@ -1,10 +1,10 @@
 [
 	{
-		"audioPath": "/audio/1-13 13 T1 Pt1 Q1.m4a"
+		"audioPath": "/audio/1-Q1.m4a"
 		, "answerText": "/answers/1_1.txt"
 	}
 	, {
-		"audioPath": "/audio/1-46 46 T1 Pt3 Q32-34 ‰ï˜b.m4a"
+		"audioPath": "/audio/1-Q32-34.m4a"
 		, "answerText": "/answers/1_32-34.txt"
 	}
 ]
