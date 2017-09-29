@@ -40,7 +40,7 @@
 	function answer() {
 		$('#buttonAnswer').prop('disabled', true);
 		$('#compare').mergely({
-			cmsettings: { readOnly: true, lineNumbers: true, editor_height: '100px' },
+			cmsettings: { readOnly: true, lineNumbers: true, lineWrapping: true },
 			lhs: function(setValue) {
 				setValue($('#textarea1').val());
 			},
