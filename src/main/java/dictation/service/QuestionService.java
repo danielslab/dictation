@@ -1,15 +1,12 @@
 package dictation.service;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import dictation.model.QuestionModel;
