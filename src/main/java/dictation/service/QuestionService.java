@@ -15,6 +15,7 @@ import dictation.util.FileUtil;
 @Service
 public class QuestionService {
 	private static final String QUESTION_FILE_PATH = "/questions/questions.json";
+	private static final String PROPERTY_KEY_NAME = "name";
 	private static final String PROPERTY_KEY_AUDIO_PATH = "audioPath";
 	private static final String PROPERTY_KEY_ANSWER_TEXT = "answerText";
 
@@ -27,9 +28,11 @@ public class QuestionService {
 		JsonParser jsonParser = JsonParserFactory.getJsonParser();
 		List<Object> list = jsonParser.parseList(FileUtil.readFile(QUESTION_FILE_PATH));
 		List<QuestionModel> resultList = new ArrayList<QuestionModel>();
-		for(Object o : list) {
-			Map<String, String> map = (Map<String, String>)o;
+		for(int i=0; i<list.size(); i++) {
+			Map<String, String> map = (Map<String, String>)list.get(i);
 			QuestionModel model = new QuestionModel();
+			model.setId(i);
+			model.setName(map.get(PROPERTY_KEY_NAME));
 			model.setAudioPath(map.get(PROPERTY_KEY_AUDIO_PATH));
 			model.setAnswerText(FileUtil.readFile(map.get(PROPERTY_KEY_ANSWER_TEXT)));
 			resultList.add(model);

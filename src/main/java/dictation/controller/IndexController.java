@@ -12,6 +12,6 @@ public class IndexController {
     @GetMapping("/")
     public String questions(Model model) throws IOException {
     	// TODO
-        return "redirect:/questions/0";
+        return "redirect:/questions";
     }
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Questions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	
+	<!-- bootstrap -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+	
+	<!-- mergely -->
+	<script type="text/javascript" src="/lib/codemirror.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="/lib/codemirror.css" />
+	<script type="text/javascript" src="/lib/mergely.js"></script>
+	<link type="text/css" rel="stylesheet" href="/lib/mergely.css" />
+
+	<!-- shortcut -->
+	<script type="text/javascript" src="/lib/shortcut.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<h2>Questions</h2>
+		
+		<table class="table table-striped">
+			<tr th:each="question,rowStat:*{questions}">
+				<td>
+					<a th:text="${question.name}" th:href="${'/questions/' + question.id}"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
