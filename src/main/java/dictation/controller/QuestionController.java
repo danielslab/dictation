@@ -19,8 +19,8 @@ public class QuestionController {
 
     @GetMapping("/questions")
     public String questions(Model model) throws IOException {
-    	// TODO
-        return "redirect:/questions/0";
+    	model.addAttribute("questions", questionService.getQuestions());
+    	return "questions";
     }
 
     @GetMapping("/questions/{id}")

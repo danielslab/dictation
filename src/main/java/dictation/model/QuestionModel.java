@@ -1,9 +1,23 @@
 package dictation.model;
 
 public class QuestionModel {
+	private Integer id;
+	private String name;
 	private String audioPath;
 	private String answerText;
 
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getAudioPath() {
 		return audioPath;
 	}
@@ -19,6 +33,6 @@ public class QuestionModel {
 
 	@Override
 	public String toString() {
-		return "QuestionModel [audioPath=" + audioPath + ", answerText=" + answerText + "]";
+		return "QuestionModel [name=" + name + ", audioPath=" + audioPath + ", answerText=" + answerText + "]";
 	}
 }
