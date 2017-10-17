@@ -19,17 +19,54 @@
 
 	<!-- shortcut -->
 	<script type="text/javascript" src="/lib/shortcut.js"></script>
+
+	<style type="text/css">
+	  .navbar-nav > li > a, .navbar-brand {
+	    padding-top:4px !important; 
+	    padding-bottom:0 !important;
+	    height: 28px;
+	  }
+	.navbar {min-height:28px !important;}
+	</style>
 </head>
 <body>
-	<div class="container-fluid">
-		<h2>Questions</h2>
-		
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">Dictation</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/questions">Questions</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/">Logout</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<div class="container">
 		<table class="table table-striped">
-			<tr th:each="question,rowStat:*{questions}">
-				<td>
-					<a th:text="${question.name}" th:href="${'/questions/' + question.id}"/>
-				</td>
-			</tr>
+			<tbody>
+				<tr th:each="question,rowStat:*{questions}">
+					<td th:text="${question.name}"></td>
+					<td>
+						Part x
+					</td>
+					<td>
+						<a th:text="Dictation" th:href="${'/dictations/' + question.id}"/>
+					</td>
+					<td>
+						<a th:text="Shadowing" th:href="${'/shadowings/' + question.id}"/>
+					</td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 </body>
