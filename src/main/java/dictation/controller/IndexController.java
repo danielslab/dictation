@@ -38,7 +38,7 @@ public class IndexController {
 	@RequestMapping(value = "/twittercallback", method = RequestMethod.GET)
 	public ModelAndView twittercallback(@RequestParam(value = "oauth_token", required = false) String oauth_token, @RequestParam(value = "oauth_verifier", required = false) String oauth_verifier) {
 		if (oauth_token == null) {
-			return new ModelAndView("redirect:/cancel", new HashMap<String, Object>());
+			return new ModelAndView("redirect:/error", new HashMap<String, Object>());
 		}
 
 		TwitterConnectionFactory connectionFactory = new TwitterConnectionFactory(System.getenv("CONSUMER_KEY"), System.getenv("CONSUMER_SECRET"));
@@ -50,7 +50,7 @@ public class IndexController {
 		Twitter twitter = new TwitterTemplate(System.getenv("CONSUMER_KEY"), System.getenv("CONSUMER_SECRET"), accessToken.getValue(), accessToken.getSecret());
 		String screenName = twitter.userOperations().getUserProfile().getScreenName();
 		if (!SPECIAL_ACCOUNT.equals(screenName)) {
-			return new ModelAndView("redirect:/cancel", new HashMap<String, Object>());
+			return new ModelAndView("redirect:/error", new HashMap<String, Object>());
 		}
 
 		Authentication auth = new UsernamePasswordAuthenticationToken("user", "password");
@@ -73,9 +73,8 @@ public class IndexController {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
-	public String cancel() {
-		return "redirect:/error";
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	public String error() {
+		return "error";
 	}
-
 }
