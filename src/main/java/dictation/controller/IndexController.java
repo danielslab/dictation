@@ -3,6 +3,9 @@ package dictation.controller;
 import java.net.URI;
 import java.util.HashMap;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.oauth1.AuthorizedRequestToken;
 import org.springframework.social.oauth1.OAuth1Operations;
 import org.springframework.social.oauth1.OAuth1Parameters;
@@ -50,9 +53,26 @@ public class IndexController {
 			return new ModelAndView("redirect:/cancel", new HashMap<String, Object>());
 		}
 
+		Authentication auth = new UsernamePasswordAuthenticationToken("user", "password");
+		SecurityContextHolder.getContext().setAuthentication(auth);
 		return new ModelAndView("redirect:/questions", new HashMap<String, Object>());
 	}
 
+	@RequestMapping("/")
+	public String root() {
+		return "redirect:/index";
+	}
+
+	@RequestMapping("/index")
+	public String index() {
+		return "index";
+	}
+
+	@RequestMapping(value = "/login")
+	public String login() {
+		return "login";
+	}
+	
 	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
 	public String cancel() {
 		return "redirect:/error";

@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
 		<h1>Dictation</h1>
-		<form name="form1" method="POST" action="/twitterlogin">
+		<form th:action="@{/twitterlogin}" method="post">
 			<input type="image" name="twitter_login" src="/image/sign-in-with-twitter-gray.png"/>
 		</form>
 	</div>
