@@ -53,7 +53,7 @@ public class IndexController {
 			return new ModelAndView("redirect:/error", new HashMap<String, Object>());
 		}
 
-		Authentication auth = new UsernamePasswordAuthenticationToken("user", "password");
+		Authentication auth = new UsernamePasswordAuthenticationToken("taka_2", "password");
 		SecurityContextHolder.getContext().setAuthentication(auth);
 		return new ModelAndView("redirect:/questions", new HashMap<String, Object>());
 	}
