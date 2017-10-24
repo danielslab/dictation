@@ -30,8 +30,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Controller
 public class IndexController {
 
-	private static final String SPECIAL_ACCOUNT = "taka_2";
-
     @Autowired
     private AuthenticationManager authManager;
 
@@ -59,9 +57,6 @@ public class IndexController {
 
 		Twitter twitter = new TwitterTemplate(System.getenv("CONSUMER_KEY"), System.getenv("CONSUMER_SECRET"), accessToken.getValue(), accessToken.getSecret());
 		String screenName = twitter.userOperations().getUserProfile().getScreenName();
-		if (!SPECIAL_ACCOUNT.equals(screenName)) {
-			return new ModelAndView("redirect:/error", new HashMap<String, Object>());
-		}
 
         // 許可ロールの設定
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
