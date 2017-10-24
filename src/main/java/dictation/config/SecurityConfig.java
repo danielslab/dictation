@@ -1,5 +1,7 @@
 package dictation.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,16 +16,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers("/audio/**", "/image/**", "/lib/**", "/index.html", "/twitterlogin", "/twittercallback", "/error").permitAll()
-				.antMatchers("/questions/**").hasRole("USER")
+				.antMatchers("/questions/**", "/dictations/**").hasRole("USER")
 				.and()
 			.formLogin()
 				.loginPage("/login").failureUrl("/");
 	}
 
 	@Autowired
+	DataSource dataSource;
+
+	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth
-			.inMemoryAuthentication()
-				.withUser("user").password("password").roles("USER");
+			.jdbcAuthentication().dataSource(dataSource);
 	}
 }

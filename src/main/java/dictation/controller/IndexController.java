@@ -1,11 +1,18 @@
 package dictation.controller;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.social.oauth1.AuthorizedRequestToken;
 import org.springframework.social.oauth1.OAuth1Operations;
 import org.springframework.social.oauth1.OAuth1Parameters;
@@ -24,6 +31,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class IndexController {
 
 	private static final String SPECIAL_ACCOUNT = "taka_2";
+
+    @Autowired
+    private AuthenticationManager authManager;
 
 	@RequestMapping(value = "/twitterlogin", method = RequestMethod.POST)
 	public ModelAndView twitterlogin(UriComponentsBuilder builder) {
@@ -53,8 +63,26 @@ public class IndexController {
 			return new ModelAndView("redirect:/error", new HashMap<String, Object>());
 		}
 
-		Authentication auth = new UsernamePasswordAuthenticationToken("user", "password");
-		SecurityContextHolder.getContext().setAuthentication(auth);
+        // 許可ロールの設定
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority("USER"));
+
+        // SpringSecurity認証 - ユーザID/パスワード認証を設定する - パスワードはpassword固定
+        Authentication authentication =
+                new UsernamePasswordAuthenticationToken(
+                        screenName, "password", authorities);
+
+        // SpringSecurity認証マネージャ経由にて認証を行う。
+       	authentication = authManager.authenticate(authentication);
+
+        // SpringSecurityコンテキストを生成し、SpringSecurityの認証情報を格納する
+        SecurityContextImpl context = new SecurityContextImpl();
+        context.setAuthentication(authentication);
+
+        // SpringSecurityコンテキストをコンテキストホルダーへ格納し、認証連携を完了する。
+        // この処理にて、SpringSecurityの設定(=HTTP用認証)を完了する。
+        SecurityContextHolder.setContext(context);
+
 		return new ModelAndView("redirect:/questions", new HashMap<String, Object>());
 	}
 
