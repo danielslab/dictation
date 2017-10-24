@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers("/audio/**", "/image/**", "/lib/**", "/index.html", "/twitterlogin", "/twittercallback", "/error").permitAll()
-				.antMatchers("/questions/**").hasRole("USER")
+				.antMatchers("/questions/**", "/dictations/**").hasRole("USER")
 				.and()
 			.formLogin()
 				.loginPage("/login").failureUrl("/");

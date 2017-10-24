@@ -27,7 +27,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public boolean getEnabled() {
+	public boolean isEnabled() {
 		return enabled;
 	}
 	public void setEnabled(boolean enabled) {
