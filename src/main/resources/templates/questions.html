@@ -12,10 +12,10 @@
 						Part x
 					</td>
 					<td>
-						<a th:text="Dictation" th:href="${'/dictations/' + question.id}"/>
+						<a th:text="Dictation" th:href="@{'/dictations/' + ${question.id}}"/>
 					</td>
 					<td>
-						<a th:text="Shadowing" th:href="${'/shadowings/' + question.id}"/>
+						<a th:text="Shadowing" th:href="@{'/shadowings/' + ${question.id}}"/>
 					</td>
 				</tr>
 			</tbody>
