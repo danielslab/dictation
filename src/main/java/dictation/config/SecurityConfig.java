@@ -15,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/audio/**", "/image/**", "/lib/**", "/index.html", "/twitterlogin", "/twittercallback", "/error").permitAll()
+				.antMatchers("/audio/**", "/image/**", "/lib/**", "/css/**", "/js/**", "/index.html", "/twitterlogin", "/twittercallback", "/error").permitAll()
 				.antMatchers("/questions/**", "/dictations/**").hasRole("USER")
 				.and()
 			.formLogin()
