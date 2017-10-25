@@ -1,142 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Dictation</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-	<!-- jquery -->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	
-	<!-- bootstrap -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
-	
-	<!-- mergely -->
-	<script type="text/javascript" src="/lib/codemirror.min.js"></script>
-	<link type="text/css" rel="stylesheet" href="/lib/codemirror.css" />
-	<script type="text/javascript" src="/lib/mergely.js"></script>
-	<link type="text/css" rel="stylesheet" href="/lib/mergely.css" />
-
-	<!-- shortcut -->
-	<script type="text/javascript" src="/lib/shortcut.js"></script>
-
-	<script type="text/javascript" th:inline="javascript">
-	function rewindAudio(sec) {
-		if(sec == -1) {
-			$('#audio1').get(0).currentTime = 0;
-		} else {
-			$('#audio1').get(0).currentTime -= sec;
-		}
-	}
-	function pauseAudio() {
-		$('#audio1').get(0).pause();
-	}
-	function playAudio() {
-		$('#audio1').get(0).play();
-	}
-	function focusTextArea() {
-		$('#textarea1').focus();
-	}
-	function answer() {
-		$('#buttonAnswer').prop('disabled', true);
-		$('#compare').mergely({
-			cmsettings: { readOnly: true, lineNumbers: true, lineWrapping: true },
-			lhs: function(setValue) {
-				setValue($('#textarea1').val());
-			},
-			rhs: function(setValue) {
-				setValue(/*[[ ${question.answerText} ]]*/);
-			}
-		});
-		$('#compareResult').show();
-	}
-	function next() {
-		var id = parseInt(/*[[ ${id} ]]*/);
-		location.href = "/dictations/" + (id+1);
-	}
-
-	$(document).ready(function () {
-		$('#compareResult').hide();
-	
-		// Event handlers.
-		$('#buttonRewind').click(function() {
-			rewindAudio(-1);
-		});
-		$('#buttonRewind5sec').click(function() {
-			rewindAudio(5);
-		});
-		$('#buttonPause').click(function() {
-			pauseAudio();
-		});
-		$('#buttonPlay').click(function() {
-			playAudio();
-		});
-		$('#buttonAnswer').click(function() {
-			answer();
-		});
-		$('#buttonNext').click(function() {
-			next();
-		});
-
-		// Setup shortcuts.
-		shortcut.add("Alt+F1",function() {
-			rewindAudio(-1);
-		});
-		shortcut.add("Alt+F5",function() {
-			rewindAudio(5);
-		});
-		shortcut.add("Alt+F6",function() {
-			pauseAudio();
-		});
-		shortcut.add("Alt+F7",function() {
-			playAudio();
-		});
-		shortcut.add("Alt+F8",function() {
-			focusTextArea();
-		});
-		shortcut.add("Alt+F9",function() {
-			answer();
-		});
-		shortcut.add("Alt+F10",function() {
-			next();
-		});
-	});
-	</script>
-
-	<style type="text/css">
-	  audio {width: 600px;}
-	  .btn {margin-right: 15px;}
-	  #textarea1 {ime-mode: inactive;}
-	  .navbar-nav > li > a, .navbar-brand {
-	    padding-top:4px !important; 
-	    padding-bottom:0 !important;
-	    height: 28px;
-	  }
-	.navbar {min-height:28px !important;}
-	</style>
-</head>
+<head th:replace="_head::head('dictation')"></head>
 <body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<a class="navbar-brand" href="/">Dictation</a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="/questions">Questions</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a></li>
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-fluid -->
-	</nav>
+	<nav th:replace="_navbar::navbar"></nav>
 	<div class="container-fluid">
 		<h3>Dictation</h3>
 		
@@ -166,5 +32,9 @@
 	<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
 		<input type="submit" value="Sign Out" />
 	</form>
+	<script type="text/javascript" th:inline="javascript">
+	    var answerText = /*[[ ${question.answerText} ]]*/;
+	    var strId = /*[[ ${id} ]]*/;
+	</script>
 </body>
 </html>

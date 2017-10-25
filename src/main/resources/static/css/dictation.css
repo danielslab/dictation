@@ -1,0 +1,11 @@
+audio {
+	width: 600px;
+}
+
+.btn {
+	margin-right: 15px;
+}
+
+#textarea1 {
+	ime-mode: inactive;
+}
