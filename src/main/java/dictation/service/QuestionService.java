@@ -18,7 +18,7 @@ public class QuestionService {
 	 * @return 問題情報一覧
 	 */
 	public List<Question> getQuestions() {
-		return questionRepository.findAll();
+		return questionRepository.findAllByOrderByIdAsc();
 	}
 
 	/**
