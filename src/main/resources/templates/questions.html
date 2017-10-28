@@ -7,10 +7,8 @@
 		<table class="table table-striped">
 			<tbody>
 				<tr th:each="question,rowStat:*{questions}">
-					<td th:text="${question.name}"></td>
-					<td>
-						Part x
-					</td>
+					<td th:text="${question.name}"/>
+					<td th:text="${question.part}"/>
 					<td>
 						<a th:text="Dictation" th:href="@{'/dictations/' + ${question.id}}"/>
 					</td>
