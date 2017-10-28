@@ -1,3 +1,6 @@
+	var startTime;
+	var answerTime;
+	
 	function rewindAudio(sec) {
 		if(sec == -1) {
 			$('#audio1').get(0).currentTime = 0;
@@ -15,11 +18,44 @@
 		$('#textarea1').focus();
 	}
 	function answer() {
+		answerTime = new Date();
+		// 経過時間
+		var elapsedTime = answerTime - startTime;
+		// 回答
+		var answeredText = $('#textarea1').val();
+		// 記録用オブジェクト
+		var JSONdata = {
+			"user": {
+				"username": username
+			}
+			, "question": {
+				id: questionId
+			}
+			, "elapsedTime": elapsedTime
+			, "answeredText": answeredText
+		};
+		$.ajax({
+			type : "POST",
+			url : "/records",
+			data : JSON.stringify(JSONdata),
+			contentType : "application/json; charset=utf-8",
+			crossDomain : true,
+			dataType : "json",
+			headers: {'X-CSRF-TOKEN': csrfToken},
+			success : function(data, status, jqXHR) {
+				// Nothing to do.
+			},
+			error : function(jqXHR, status) {
+				// error handler
+				console.log('fail' + jqXHR.responseText + ":" + status.code);
+			}
+		});
+	
 		$('#buttonAnswer').prop('disabled', true);
 		$('#compare').mergely({
 			cmsettings: { readOnly: true, lineNumbers: true, lineWrapping: true },
 			lhs: function(setValue) {
-				setValue($('#textarea1').val());
+				setValue(answeredText);
 			},
 			rhs: function(setValue) {
 				setValue(answerText);
@@ -28,10 +64,10 @@
 		$('#compareResult').show();
 	}
 	function next() {
-		var id = parseInt(strId);
-		location.href = "/dictations/" + (id+1);
+		var id = parseInt(questionId);
+		location.href = "/dictations/" + (questionId+1);
 	}
-
+	
 	$(document).ready(function () {
 		$('#compareResult').hide();
 	
@@ -54,7 +90,7 @@
 		$('#buttonNext').click(function() {
 			next();
 		});
-
+	
 		// Setup shortcuts.
 		shortcut.add("Alt+F1",function() {
 			rewindAudio(-1);
@@ -77,4 +113,6 @@
 		shortcut.add("Alt+F10",function() {
 			next();
 		});
+	
+		startTime = new Date();
 	});

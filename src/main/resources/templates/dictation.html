@@ -4,7 +4,7 @@
 <body>
 	<nav th:replace="_navbar::navbar"></nav>
 	<div class="container-fluid">
-		<h3>Dictation</h3>
+		<h3 th:text="${'Dictation (' + question.name + ')'}"></h3>
 		
 		<div class="container-fluid">
 			<audio id="audio1" th:attr="src=${question.audioPath}" autoplay="autoplay" controls="controls"></audio>
@@ -33,8 +33,10 @@
 		<input type="submit" value="Sign Out" />
 	</form>
 	<script type="text/javascript" th:inline="javascript">
+	    var username = /*[[ ${principal.name} ]]*/;
+	    var questionId = /*[[ ${question.id} ]]*/;
 	    var answerText = /*[[ ${question.answerText} ]]*/;
-	    var strId = /*[[ ${id} ]]*/;
+	    var csrfToken = /*[[ ${_csrf.token} ]]*/;
 	</script>
 </body>
 </html>
