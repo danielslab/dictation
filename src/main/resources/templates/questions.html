@@ -6,14 +6,24 @@
 	<div class="container">
 		<table class="table table-striped">
 			<tbody>
+				<tr th:if="${latestRecord}">
+					<td>Continue</td>
+					<td>-</td>
+					<td>
+						<a th:text="Dictation" th:href="@{'/dictations/' + ${latestRecord.question.id} + '/next'}"></a>
+					</td>
+					<td>
+						<a th:text="Shadowing" th:href="@{'/shadowings/' + ${latestRecord.question.id} + '/next'}"></a>
+					</td>
+				</tr>
 				<tr th:each="question,rowStat:*{questions}">
 					<td th:text="${question.name}"/>
 					<td th:text="${question.part}"/>
 					<td>
-						<a th:text="Dictation" th:href="@{'/dictations/' + ${question.id}}"/>
+						<a th:text="Dictation" th:href="@{'/dictations/' + ${question.id}}"></a>
 					</td>
 					<td>
-						<a th:text="Shadowing" th:href="@{'/shadowings/' + ${question.id}}"/>
+						<a th:text="Shadowing" th:href="@{'/shadowings/' + ${question.id}}"></a>
 					</td>
 				</tr>
 			</tbody>

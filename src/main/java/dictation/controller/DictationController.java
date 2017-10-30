@@ -31,4 +31,10 @@ public class DictationController {
         model.addAttribute("question", question);
         return "dictation";
     }
+
+    @GetMapping("/dictations/{id}/next")
+    public String next(Model model, @PathVariable String id, Principal principal) throws IOException {
+    	long longId = Long.parseLong(id);
+    	return "redirect:/dictations/" + (longId+1);
+    }
 }

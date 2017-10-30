@@ -21,6 +21,19 @@ public class RecordService {
 	}
 
 	/**
+	 * 一番直近のレコードを取得する
+	 * @return レコードがない場合はnullを返す。
+	 */
+	public Record getLatestRecord() {
+		List<Record> records = recordRepository.findAllByOrderByCreatedDateDesc();
+		if(records.size() == 0) {
+			return null;
+		} else {
+			return records.get(0);
+		}
+	}
+
+	/**
 	 * レコードを保存する。
 	 */
 	public Record save(Record record) {
