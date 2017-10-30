@@ -64,8 +64,7 @@ function answer() {
 	$('#compareResult').show();
 }
 function next() {
-	var id = parseInt(questionId);
-	location.href = "/dictations/" + (questionId+1);
+	location.href = "/dictations/" + questionId + "/next";
 }
 
 $(document).ready(function () {
