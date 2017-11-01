@@ -1,8 +1,10 @@
 DELETE FROM users;
 INSERT INTO users(username, password, enabled) VALUES('taka_2', 'password', true);
+INSERT INTO users(username, password, enabled) VALUES('taka_2_test', 'password', true);
 
 DELETE FROM authorities;
 INSERT INTO authorities(username, authority) VALUES('taka_2', 'ROLE_USER');
+INSERT INTO authorities(username, authority) VALUES('taka_2_test', 'ROLE_USER');
 
 DELETE FROM questions;
 INSERT INTO questions(id, name, part, audio_path, answer_text) values(1, '1-Q01', 'Part1', '/audio/1-Q01.m4a', 'She''s arranging some flowers.' || CHAR(13) || CHAR(10) || 'She''s moving a table.' || CHAR(13) || CHAR(10) || 'She''s putting on a jacket.' || CHAR(13) || CHAR(10) || 'She''s picking up a notebook.');
