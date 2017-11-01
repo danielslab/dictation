@@ -1,6 +1,7 @@
 package dictation.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,9 @@ public class QuestionController {
 	RecordService recordService;
 
     @GetMapping("/questions")
-    public String questions(Model model) throws IOException {
+    public String questions(Model model, Principal principal) throws IOException {
     	// 最後に実施した記録を取得する。
-    	model.addAttribute("latestRecord", recordService.getLatestRecord());
+    	model.addAttribute("latestRecord", recordService.getLatestRecord(principal.getName()));
     	model.addAttribute("questions", questionService.getQuestions());
     	return "questions";
     }
