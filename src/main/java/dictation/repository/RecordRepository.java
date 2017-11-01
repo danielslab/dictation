@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import dictation.model.Record;
 
 public interface RecordRepository extends JpaRepository<Record, Long> {
-	public List<Record> findAllByOrderByCreatedDateDesc();
+	public List<Record> findByUserUsernameOrderByCreatedDateDesc(String username);
 }

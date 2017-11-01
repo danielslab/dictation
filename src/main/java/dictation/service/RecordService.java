@@ -21,11 +21,12 @@ public class RecordService {
 	}
 
 	/**
-	 * 一番直近のレコードを取得する
+	 * 指定ユーザの一番直近のレコードを取得する
+	 * @param username ユーザ
 	 * @return レコードがない場合はnullを返す。
 	 */
-	public Record getLatestRecord() {
-		List<Record> records = recordRepository.findAllByOrderByCreatedDateDesc();
+	public Record getLatestRecord(String username) {
+		List<Record> records = recordRepository.findByUserUsernameOrderByCreatedDateDesc(username);
 		if(records.size() == 0) {
 			return null;
 		} else {
