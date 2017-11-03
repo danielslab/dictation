@@ -1,5 +1,7 @@
 audio {
 	width: 600px;
+	height: 40px;
+	vertical-align: middle;
 }
 
 .btn {
@@ -8,4 +10,10 @@ audio {
 
 #textarea1 {
 	ime-mode: inactive;
+}
+
+img.audioControl {
+	width: 40px;
+	height: 40px;
+	vertical-align: middle;
 }
