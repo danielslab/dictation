@@ -74,8 +74,8 @@ $(document).ready(function () {
 	$('#buttonRewind').click(function() {
 		rewindAudio(-1);
 	});
-	$('#buttonRewind5sec').click(function() {
-		rewindAudio(5);
+	$('#buttonRewind3sec').click(function() {
+		rewindAudio(3);
 	});
 	$('#buttonPause').click(function() {
 		pauseAudio();
@@ -95,7 +95,7 @@ $(document).ready(function () {
 		rewindAudio(-1);
 	});
 	shortcut.add("Alt+F5",function() {
-		rewindAudio(5);
+		rewindAudio(3);
 	});
 	shortcut.add("Alt+F6",function() {
 		pauseAudio();

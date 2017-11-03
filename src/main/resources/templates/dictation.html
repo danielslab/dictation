@@ -7,6 +7,10 @@
 		<h3 th:text="${'Dictation (' + question.name + ')'}"></h3>
 		
 		<div class="container-fluid">
+			<img class="audioControl" id="buttonRewind" src="/image/player_button_blue03_hayamodoshi.png"/>
+			<img class="audioControl" id="buttonRewind3sec" src="/image/player_button_blue14_repeat.png"/>
+			<img class="audioControl" id="buttonPause" src="/image/player_button_blue05_ichijiteishi.png"/>
+			<img class="audioControl" id="buttonPlay" src="/image/player_button_blue01_saisei.png"/>
 			<audio id="audio1" th:attr="src=${question.audioPath}" autoplay="autoplay" controls="controls"></audio>
 		</div>
 		
@@ -16,10 +20,6 @@
 		</div>
 		
 		<div class="container-fluid" style="margin-top:10px">
-			<button class="btn btn-danger" id="buttonRewind" name="rewind">Rewind(Alt+F1)</button>
-			<button class="btn btn-danger" id="buttonRewind5sec" name="rewind5sec">Rewind5sec(Alt+F5)</button>
-			<button class="btn btn-danger" id="buttonPause" name="pause">Pause(Alt+F6)</button>
-			<button class="btn btn-success" id="buttonPlay" name="play">Play(Alt+F7)</button>
 			<button class="btn btn-primary" id="buttonAnswer" name="answer">Answer(Alt+F9)</button>
 			<button class="btn btn-light" id="buttonNext" name="clear">Next(Alt+F10)</button>
 		</div>
