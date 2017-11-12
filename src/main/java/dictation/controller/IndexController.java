@@ -91,11 +91,6 @@ public class IndexController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/login")
-	public String login() {
-		return "login";
-	}
-	
 	@RequestMapping(value = "/error", method = RequestMethod.GET)
 	public String error() {
 		return "error";

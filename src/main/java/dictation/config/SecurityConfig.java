@@ -15,11 +15,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/audio/**", "/image/**", "/lib/**", "/css/**", "/js/**", "/login", "/index.html", "/twitterlogin", "/twittercallback", "/error").permitAll()
+				.antMatchers("/audio/**", "/image/**", "/lib/**", "/css/**", "/js/**", "/", "/index", "/twitterlogin", "/twittercallback", "/error").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
-				.loginPage("/login").failureUrl("/");
+				.loginPage("/index").failureUrl("/");
 	}
 
 	@Autowired
