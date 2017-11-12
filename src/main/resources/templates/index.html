@@ -5,6 +5,9 @@
 	<div class="container">
 		<h1>Dictation</h1>
 		<a th:href = "@{/questions}">Go to Home</a>
+		<form th:action="@{/twitterlogin}" method="post">
+			<input type="image" name="twitter_login" th:src="@{/image/sign-in-with-twitter-gray.png}"/>
+		</form>
 	</div>
 </body>
 </html>	
